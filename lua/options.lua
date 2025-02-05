@@ -64,5 +64,3 @@ vim.opt.scrolloff = 10
 -- [PVS]: My options starting here
 vim.opt.wrap = true
 vim.opt.mousemoveevent = true
-
--- vim: ts=2 sts=2 sw=2 et

@@ -151,14 +151,15 @@ return {
       })
 
       -- Change diagnostic symbols in the sign column (gutter)
-      -- if vim.g.have_nerd_font then
-      --   local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
-      --   local diagnostic_signs = {}
-      --   for type, icon in pairs(signs) do
-      --     diagnostic_signs[vim.diagnostic.severity[type]] = icon
-      --   end
-      --   vim.diagnostic.config { signs = { text = diagnostic_signs } }
-      -- end
+      -- [PVS]: I've uncommented this
+      if vim.g.have_nerd_font then
+        local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
+        local diagnostic_signs = {}
+        for type, icon in pairs(signs) do
+          diagnostic_signs[vim.diagnostic.severity[type]] = icon
+        end
+        vim.diagnostic.config { signs = { text = diagnostic_signs } }
+      end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -200,10 +201,66 @@ return {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              -- [PVS]: I've uncommented this
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
+
+        -- [PVS]: Added the following servers:
+
+        -- Markdown
+        marksman = {},
+
+        -- Yaml
+        yamlls = {
+          settings = {
+            yaml = {
+              format = {
+                enable = true,
+                singleQuote = false,
+                bracketSpacing = true,
+              },
+              validate = true,
+              completion = true,
+            },
+          },
+        },
+
+        -- Golang
+        gopls = {
+          settings = {
+            filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+          },
+        },
+
+        -- Bash
+        bashls = {
+          settings = {
+            filetypes = { 'bash', 'sh' },
+          },
+        },
+
+        -- Terraform
+        terraformls = {
+          settings = {
+            filetypes = { 'terraform', 'terraform-vars' },
+          },
+        },
+
+        -- Json
+        jsonls = {
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+            },
+          },
+        },
+
+        -- Helm
+        helm_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -222,6 +279,9 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        -- [PVS]: Added the following formatters and linters:
+        'markdownlint', -- For markdown linting
+        'goimports', -- For golang imports
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -240,4 +300,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

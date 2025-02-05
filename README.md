@@ -201,7 +201,7 @@ sudo apt install make gcc ripgrep unzip git xclip neovim
 ```
 </details>
 
-#### Linux Insta
+#### Linux Install
 <details><summary>Ubuntu Install Steps</summary>
 
 ```
@@ -226,43 +226,55 @@ sudo tar -C /opt -xzf nvim-linux64.tar.gz
 # make it available in /usr/local/bin, distro installs to /usr/bin
 sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/
 ```
+
 </details>
 <details><summary>Fedora Install Steps</summary>
 
-```
+```bash
 sudo dnf install -y gcc make git ripgrep fd-find unzip neovim
 ```
 </details>
 
 <details><summary>Arch Install Steps</summary>
 
-```
+```bash
 sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
 ```
+
 </details>
 
-
 ## PVS Modifications
-### General Configuration Modifications
-First of all, I've commited my `lazy-lock.json` file (removed from `.gitignore`) <br>
 
-I've tried to do as few modifications as possible to the already existing files, so it would be easy to rebase with the original fork. <br>
-The modifications that I've done, though, are marked with a previous comment started by: `-- [PVS]: `. <br>
-A part from modifying some parameters, it's possible that at the end of the file I've added my own section (my section will always be the last one, there's not going to be any upstream code after it). <br>
+### General Configuration Modifications
+
+First of all, I've commited my `lazy-lock.json` file (removed from `.gitignore`)\
+
+I've tried to do as few modifications as possible to the already existing files, so it would be easy to rebase with the original fork.\
+The modifications that I've done, though, are marked with a previous comment started by: `-- [PVS]:`.\
+A part from modifying some parameters, it's possible that at the end of the file I've added my own section (my section will always be the last one, there's not going to be any upstream code after it).\
 
 Files where I've modified paramters or added my section:
-- `init.lua`
-- `lua/keymaps.lua`
-- `lua/lazy-plugins.lua`
-- `lua/options.lua`
+
+* `init.lua`
+* `lua/keymaps.lua`
+* `lua/lazy-plugins.lua`
+* `lua/options.lua`
+
+Also, in the `init.lua`, I added another import for the Autocommands. In the kickstart config, the autocommands are put together in the same files as keymaps, and I moved them out to a new `lua/autocommands.lua` file and imported this.
 
 ### Custom Installed Plugins
-I installed custom plugins on the `lua/custom/plugins` folder. Everything at this folder is added automatically in the `lua/lazy-plugins.lua`. <br>
+
+I installed custom plugins on the `lua/custom/plugins` folder. Everything at this folder is added automatically in the `lua/lazy-plugins.lua`.\
 I've documented the reason for each plugin installation as well as possible config in the plugin file itself.
 
 ### Added ftplugin
-I've added the `ftplugin` folder on the root to manage filetype specific settings & configuration. <br>
-This is only when required, sometimes the formatter already knows how to deal with it and I don't need to add it there. <br>
+
+I've added the `ftplugin` folder on the root to manage filetype specific settings & configuration.\
+This is only when required, sometimes the formatter already knows how to deal with it and I don't need to add it there.\
 This allows me to remove the `vim: ts=2 sts=2 sw=2 et` comment that we had at the end of each file.
 
+### LSP Config
+
+I've also modified the config in `lua/kickstart/plugins/lspconfig.lua` to add the servers, linters and formatters I care about.\
+As always, if I've modified/added some lines, I've marked it with a `-- [PVS]:` comment, as well as when I add entire sections (like new servers in the `servers` variable for the lsp-cofnig).
 
