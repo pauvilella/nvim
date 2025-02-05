@@ -201,7 +201,7 @@ sudo apt install make gcc ripgrep unzip git xclip neovim
 ```
 </details>
 
-#### Linux Install
+#### Linux Insta
 <details><summary>Ubuntu Install Steps</summary>
 
 ```
@@ -240,4 +240,29 @@ sudo dnf install -y gcc make git ripgrep fd-find unzip neovim
 sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
 ```
 </details>
+
+
+## PVS Modifications
+### General Configuration Modifications
+First of all, I've commited my `lazy-lock.json` file (removed from `.gitignore`) <br>
+
+I've tried to do as few modifications as possible to the already existing files, so it would be easy to rebase with the original fork. <br>
+The modifications that I've done, though, are marked with a previous comment started by: `-- [PVS]: `. <br>
+A part from modifying some parameters, it's possible that at the end of the file I've added my own section (my section will always be the last one, there's not going to be any upstream code after it). <br>
+
+Files where I've modified paramters or added my section:
+- `init.lua`
+- `lua/keymaps.lua`
+- `lua/lazy-plugins.lua`
+- `lua/options.lua`
+
+### Custom Installed Plugins
+I installed custom plugins on the `lua/custom/plugins` folder. Everything at this folder is added automatically in the `lua/lazy-plugins.lua`. <br>
+I've documented the reason for each plugin installation as well as possible config in the plugin file itself.
+
+### Added ftplugin
+I've added the `ftplugin` folder on the root to manage filetype specific settings & configuration. <br>
+This is only when required, sometimes the formatter already knows how to deal with it and I don't need to add it there. <br>
+This allows me to remove the `vim: ts=2 sts=2 sw=2 et` comment that we had at the end of each file.
+
 
