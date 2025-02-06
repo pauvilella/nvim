@@ -245,6 +245,12 @@ sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
 
 ## PVS Modifications
 
+### How to use it
+
+Basically, you just have to `git clone` this repo (or the fork you might have created) and put it in your `~/.config` directory, and will end up like: `~/.config/nvim`.\
+After this, you just have to type `nvim` and all the plugins, servers, dependencies, etc. should install just fine (if you have the prerequisits that appear in the original readme, which you probably do).\
+That's it! You should have a working installation now! :)
+
 ### General Configuration Modifications
 
 First of all, I've commited my `lazy-lock.json` file (removed from `.gitignore`)\
@@ -273,8 +279,7 @@ I've added the `ftplugin` folder on the root to manage filetype specific setting
 This is only when required, sometimes the formatter already knows how to deal with it and I don't need to add it there.\
 This allows me to remove the `vim: ts=2 sts=2 sw=2 et` comment that we had at the end of each file.
 
-### LSP Config
+### Original Plugin configuration changes
 
-I've also modified the config in `lua/kickstart/plugins/lspconfig.lua` to add the servers, linters and formatters I care about.\
-As always, if I've modified/added some lines, I've marked it with a `-- [PVS]:` comment, as well as when I add entire sections (like new servers in the `servers` variable for the lsp-cofnig).
-
+I've done some changes on the configuration of some of the plugins that come by default in `lua/kickstart/plugins/*.lua`.\
+All the changes done there are indicated with a `-- [PVS]: ` comment, wether it is an inline change or a full new section, both are indicated.

@@ -282,6 +282,9 @@ return {
         -- [PVS]: Added the following formatters and linters:
         'markdownlint', -- For markdown linting
         'goimports', -- For golang imports
+        'hadolint', -- For dockerfile
+        'jsonlint', -- For Json
+        'tflint', -- For Terraform
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
