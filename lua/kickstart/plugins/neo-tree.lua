@@ -11,13 +11,15 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    -- [PVS]: Change the keymap to <leader>ñ because it's easier in ISO ES keyboard layout
+    { '<leader>ñ', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
     filesystem = {
       window = {
         mappings = {
-          ['\\'] = 'close_window',
+          -- [PVS]: Change keymap to <leader>ñ.
+          ['<leader>ñ'] = 'close_window',
         },
       },
     },
