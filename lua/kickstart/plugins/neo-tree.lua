@@ -17,6 +17,8 @@ return {
   opts = {
     filesystem = {
       window = {
+        -- [PVS]: Add autoexpand to match filename length
+        auto_expand_width = true,
         mappings = {
           -- [PVS]: Change keymap to <leader>ñ.
           ['<leader>ñ'] = 'close_window',
